@@ -1,0 +1,29 @@
+---
+import type { LandingDict } from '../../i18n/types';
+
+interface Props {
+  recursos: LandingDict['recursos'];
+}
+const { recursos: t } = Astro.props;
+---
+<section
+  class="coin-section coin-section--light coin-recursos"
+  id="recursos"
+  aria-labelledby="recursos-heading"
+>
+  <div class="coin-container">
+    <h2 class="coin-section__title coin-recursos__heading" id="recursos-heading">
+      {t.title}
+    </h2>
+    <div class="coin-recursos__grid">
+      {t.cards.map((card) => (
+        <a
+          class:list={['coin-recursos__card', `coin-recursos__card--${card.variant}`]}
+          href={card.href}
+        >
+          <span class="coin-recursos__card-label">{card.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

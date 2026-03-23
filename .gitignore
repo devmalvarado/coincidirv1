@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+.astro/
+
+# Env (nunca subir secretos; los .env.example sí van al repo sin valores reales)
+.env
+.env.*
+!.env.example
+web/.env
+studio/.env
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Sanity
+studio/.sanity/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cloudflare (local)
+.wrangler/

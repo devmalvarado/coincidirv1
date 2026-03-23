@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "title": "Coincidir — Center for thought and action",
+    "description": "We research, connect, and transform social realities."
+  },
+  "header": {
+    "nav": {
+      "about": "About",
+      "solutions": "Solutions",
+      "resources": "Resources",
+      "blog": "Blog"
+    },
+    "joinSupport": "Join / Support",
+    "ariaNav": "Primary",
+    "ariaLang": "Language",
+    "themeAria": "Interface theme",
+    "themeAuto": "Auto (match system)",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode"
+  },
+  "hero": {
+    "eyebrow": "Center for thought and action",
+    "heading": "We research, connect, and transform social realities.",
+    "tags": "Consulting — Evaluation — Research — Teaching — Policy advocacy",
+    "cta": "Explore Our Work",
+    "imageAlt": "Group of people gathered outdoors in conversation at sunset",
+    "caption": "Inspire. Connect. Transform."
+  },
+  "pillars": {
+    "title": "Three Strategic Pillars",
+    "items": [
+      {
+        "title": "Inspire.",
+        "text": "We share knowledge, experiences, and resources that spark creativity, foster learning, and motivate people to become agents of change."
+      },
+      {
+        "title": "Connect.",
+        "text": "We bring people and resources together, creating spaces and partnerships where dialogue turns into action."
+      },
+      {
+        "title": "Transform.",
+        "text": "We propose innovative solutions that generate positive, sustainable change centered on human dignity."
+      }
+    ]
+  },
+  "soluciones": {
+    "title": "Solutions",
+    "items": [
+      {
+        "title": "Consulting",
+        "body": "We provide comprehensive legal advisory to design, implement, and evaluate initiatives that promote and protect human rights."
+      },
+      {
+        "title": "Evaluation",
+        "body": "From program and policy design to results evaluation, we accompany each step to maximize impact and ensure the sustainability of initiatives and organizations."
+      },
+      {
+        "title": "Research",
+        "body": "Development of knowledge and evidence-based proposals grounded in our methodology."
+      },
+      {
+        "title": "Teaching",
+        "body": "We design and facilitate learning spaces that connect critical theory with transformative practice in the field."
+      },
+      {
+        "title": "Advocacy",
+        "body": "We support policy advocacy processes so community voices shape decisions that affect them."
+      }
+    ]
+  },
+  "recursos": {
+    "title": "Resources",
+    "cards": [
+      {
+        "label": "Tool kits",
+        "href": "#",
+        "variant": "purpleYellow"
+      },
+      {
+        "label": "Publications",
+        "href": "#blog",
+        "variant": "yellowPurple"
+      },
+      {
+        "label": "Organizations",
+        "href": "#",
+        "variant": "yellowPurple"
+      },
+      {
+        "label": "Videos",
+        "href": "#",
+        "variant": "darkPink"
+      }
+    ]
+  },
+  "blog": {
+    "title": "Blog",
+    "titleNote": "(Sanity)",
+    "readArticle": "Read article",
+    "empty": "No posts yet. Add “Blog post” entries in Sanity Studio."
+  },
+  "footer": {
+    "tagline": "Center for thought and action committed to critical research and transformative practice.",
+    "contact": "Contact",
+    "newsletterLink": "Newsletter",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "copyrightTpl": "© {year} Coincidir",
+    "newsletterTitle": "Newsletter",
+    "newsletterDesc": "Get essays, methods, and field updates from Coincidir.",
+    "emailPlaceholder": "you@example.org",
+    "subscribe": "Subscribe",
+    "emailLabel": "Email"
+  }
+}

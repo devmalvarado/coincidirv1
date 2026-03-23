@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "title": "Coincidir — Centro de pensamiento y acción",
+    "description": "Investigamos, conectamos y transformamos realidades sociales."
+  },
+  "header": {
+    "nav": {
+      "about": "Acerca de",
+      "solutions": "Soluciones",
+      "resources": "Recursos",
+      "blog": "Blog"
+    },
+    "joinSupport": "Únete / Apoya",
+    "ariaNav": "Principal",
+    "ariaLang": "Idioma",
+    "themeAria": "Tema de la interfaz",
+    "themeAuto": "Automático (según el sistema)",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo oscuro"
+  },
+  "hero": {
+    "eyebrow": "Centro de pensamiento y acción",
+    "heading": "Investigamos, conectamos y transformamos realidades sociales.",
+    "tags": "Consultoría — Evaluación — Investigación — Docencia — Incidencia en políticas públicas",
+    "cta": "Explora nuestro trabajo",
+    "imageAlt": "Grupo de personas reunidas al aire libre conversando al atardecer",
+    "caption": "Inspirar. Conectar. Transformar."
+  },
+  "pillars": {
+    "title": "Tres pilares estratégicos",
+    "items": [
+      {
+        "title": "Inspirar.",
+        "text": "Compartimos conocimientos, experiencias y recursos que despiertan la creatividad, favorecen el aprendizaje y motivan a las personas a ser agentes de cambio."
+      },
+      {
+        "title": "Conectar.",
+        "text": "Acercamos personas y recursos, creando espacios y alianzas donde el diálogo se convierte en acción."
+      },
+      {
+        "title": "Transformar.",
+        "text": "Proponemos soluciones innovadoras que generan cambios positivos y sostenibles, centrados en la dignidad humana."
+      }
+    ]
+  },
+  "soluciones": {
+    "title": "Soluciones",
+    "items": [
+      {
+        "title": "Consultoría",
+        "body": "Brindamos asesoría legal integral para diseñar, implementar y evaluar iniciativas que promueven y protegen los derechos humanos."
+      },
+      {
+        "title": "Evaluación",
+        "body": "Desde el diseño de programas y políticas hasta la evaluación de resultados, acompañamos cada paso para maximizar el impacto y asegurar la sostenibilidad de las iniciativas y las organizaciones."
+      },
+      {
+        "title": "Investigación",
+        "body": "Desarrollo de conocimiento y propuestas basadas en evidencia desde nuestra metodología."
+      },
+      {
+        "title": "Enseñanza",
+        "body": "Diseñamos y facilitamos espacios formativos que conectan teoría crítica con prácticas transformadoras en el territorio."
+      },
+      {
+        "title": "Incidencia",
+        "body": "Acompañamos procesos de incidencia en políticas públicas para que las voces de la comunidad condicionen decisiones que les afectan."
+      }
+    ]
+  },
+  "recursos": {
+    "title": "Recursos",
+    "cards": [
+      {
+        "label": "Tool kits",
+        "href": "#",
+        "variant": "purpleYellow"
+      },
+      {
+        "label": "Publicaciones",
+        "href": "#blog",
+        "variant": "yellowPurple"
+      },
+      {
+        "label": "Organizaciones",
+        "href": "#",
+        "variant": "yellowPurple"
+      },
+      {
+        "label": "Videos",
+        "href": "#",
+        "variant": "darkPink"
+      }
+    ]
+  },
+  "blog": {
+    "title": "Blog",
+    "titleNote": "(Sanity)",
+    "readArticle": "Leer artículo",
+    "empty": "Aún no hay publicaciones. Crea entradas tipo «Artículo (Blog)» en Sanity Studio."
+  },
+  "footer": {
+    "tagline": "Centro de pensamiento y acción comprometido con la investigación crítica y la práctica transformadora.",
+    "contact": "Contacto",
+    "newsletterLink": "Boletín",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "legal": "Aviso legal",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "copyrightTpl": "© {year} Coincidir",
+    "newsletterTitle": "Boletín",
+    "newsletterDesc": "Recibe ensayos, métodos y novedades desde el territorio con Coincidir.",
+    "emailPlaceholder": "tu@correo.org",
+    "subscribe": "Suscribirme",
+    "emailLabel": "Correo electrónico"
+  }
+}

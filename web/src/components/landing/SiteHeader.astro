@@ -1,0 +1,64 @@
+---
+import type { LandingDict, Locale } from '../../i18n/types';
+import { HOME_PATHS, homePath } from '../../i18n/paths';
+import ThemeToggle from '../ThemeToggle.astro';
+
+interface Props {
+  locale: Locale;
+  header: LandingDict['header'];
+}
+const { locale, header: t } = Astro.props;
+
+const nav = [
+  { href: '#about', label: t.nav.about },
+  { href: '#soluciones', label: t.nav.solutions },
+  { href: '#recursos', label: t.nav.resources },
+  { href: '#blog', label: t.nav.blog },
+];
+---
+<header class="coin-header">
+  <div class="coin-container coin-header__inner">
+    <a href={homePath(locale)} class="coin-logo">
+      <img
+        src="/logo-coincidir.webp"
+        alt="Coincidir"
+        width="4122"
+        height="783"
+        decoding="async"
+      />
+    </a>
+    <nav class="coin-nav" aria-label={t.ariaNav}>
+      {nav.map(({ href, label }) => (
+        <a href={href}>{label}</a>
+      ))}
+    </nav>
+    <div class="coin-header__actions">
+      <ThemeToggle
+        themeAria={t.themeAria}
+        themeAuto={t.themeAuto}
+        themeLight={t.themeLight}
+        themeDark={t.themeDark}
+      />
+      <div class="coin-lang" role="group" aria-label={t.ariaLang}>
+        <a
+          href={HOME_PATHS.es}
+          class:list={['coin-lang__link', { 'is-active': locale === 'es' }]}
+          aria-current={locale === 'es' ? 'page' : undefined}
+          lang="es"
+        >
+          ES
+        </a>
+        <span class="coin-lang__sep" aria-hidden="true"> / </span>
+        <a
+          href={HOME_PATHS.en}
+          class:list={['coin-lang__link', { 'is-active': locale === 'en' }]}
+          aria-current={locale === 'en' ? 'page' : undefined}
+          lang="en"
+        >
+          EN
+        </a>
+      </div>
+      <a class="coin-btn coin-btn--yellow" href="#join">{t.joinSupport}</a>
+    </div>
+  </div>
+</header>

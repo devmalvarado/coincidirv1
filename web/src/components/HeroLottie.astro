@@ -1,0 +1,40 @@
+---
+interface Props {
+  /** Ruta pública al .lottie (archivo en `public/`, ej. `/lottie/hero.lottie`) */
+  src?: string;
+  label?: string;
+}
+const { src = '/lottie/hero.lottie', label = 'Animación de introducción' } = Astro.props;
+---
+<div class="hero-lottie" data-lottie-src={src}>
+  <canvas class="hero-lottie__canvas" aria-label={label}></canvas>
+</div>
+<script>
+  import { DotLottie } from '@lottiefiles/dotlottie-web';
+
+  for (const root of document.querySelectorAll('.hero-lottie[data-lottie-src]')) {
+    const url = root.getAttribute('data-lottie-src');
+    const canvas = root.querySelector('.hero-lottie__canvas');
+    if (url && canvas instanceof HTMLCanvasElement) {
+      new DotLottie({
+        canvas,
+        src: url,
+        loop: true,
+        autoplay: true,
+      });
+    }
+  }
+</script>
+<style>
+  .hero-lottie {
+    width: 100%;
+    max-width: min(100%, 520px);
+    margin-inline: auto;
+  }
+  .hero-lottie__canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+</style>

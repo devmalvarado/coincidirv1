@@ -1,0 +1,32 @@
+---
+import type { LandingDict } from '../../i18n/types';
+
+interface Props {
+  hero: LandingDict['hero'];
+}
+const { hero: t } = Astro.props;
+
+const heroImage =
+  'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=960&q=80&auto=format&fit=crop';
+---
+<section class="coin-hero" id="about" aria-labelledby="hero-heading">
+  <div class="coin-container coin-hero__grid">
+    <div class="coin-hero__copy">
+      <p class="coin-eyebrow">{t.eyebrow}</p>
+      <h1 id="hero-heading">{t.heading}</h1>
+      <p class="coin-hero__tags">{t.tags}</p>
+      <a class="coin-btn coin-btn--purple" href="#soluciones">{t.cta}</a>
+    </div>
+    <figure class="coin-hero__visual">
+      <img
+        src={heroImage}
+        width="640"
+        height="480"
+        alt={t.imageAlt}
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption class="coin-hero__caption">{t.caption}</figcaption>
+    </figure>
+  </div>
+</section>

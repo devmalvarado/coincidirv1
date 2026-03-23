@@ -1,0 +1,16 @@
+{
+  "name": "coincidir",
+  "private": true,
+  "description": "Landing Astro + Sanity — despliegue en Cloudflare Pages",
+  "workspaces": [
+    "web",
+    "studio"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=web",
+    "dev:studio": "npm run dev --workspace=studio",
+    "login:studio": "npm run login --workspace=studio",
+    "build:web": "npm run build --workspace=web",
+    "build:studio": "npm run build --workspace=studio"
+  }
+}

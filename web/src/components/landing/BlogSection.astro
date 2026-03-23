@@ -1,0 +1,66 @@
+---
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { LandingDict, Locale } from '../../i18n/types';
+import { homePath } from '../../i18n/paths';
+import type { BlogPostPreview } from '../../lib/sanity-queries';
+import { formatPostTags, POST_TAG_LABELS_EN, POST_TAG_LABELS_ES } from '../../lib/post-tags';
+import { urlForImage } from '../../lib/sanity';
+
+interface Props {
+  blog: LandingDict['blog'];
+  posts: BlogPostPreview[];
+  locale: Locale;
+}
+const { blog: t, posts, locale } = Astro.props;
+const blogBase = locale === 'en' ? '/en/blog' : '/blog';
+const backHash = `${homePath(locale)}#blog`;
+const tagLabels = locale === 'en' ? POST_TAG_LABELS_EN : POST_TAG_LABELS_ES;
+---
+<section class="coin-section coin-section--light coin-blog" id="blog" aria-labelledby="blog-heading">
+  <div class="coin-container">
+    <h2 class="coin-section__title" id="blog-heading">
+      {t.title}{' '}
+      <span class="coin-section__title-note">{t.titleNote}</span>
+    </h2>
+    {posts.length === 0 ? (
+      <p class="coin-blog__empty">{t.empty}</p>
+    ) : (
+      <div class="coin-blog__grid">
+        {posts.map((post) => {
+          const slug = post.slug;
+          const tagLine = formatPostTags(post.tags, tagLabels);
+          const img = post.mainImage
+            ? urlForImage(post.mainImage as SanityImageSource)
+            : null;
+          const src = img?.width(640).height(400).fit('crop').url() ?? '';
+          return (
+            <a class="coin-blog__card" href={slug ? `${blogBase}/${slug}` : backHash}>
+              <div class="coin-blog__media">
+                {src ? (
+                  <img
+                    src={src}
+                    alt={post.title ?? ''}
+                    width="640"
+                    height="400"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="coin-blog__placeholder" aria-hidden="true" />
+                )}
+              </div>
+              <div class="coin-blog__body">
+                <h3 class="coin-blog__card-title">{post.title}</h3>
+                {tagLine.length ? (
+                  <p class="coin-blog__tags">{tagLine.join(' · ')}</p>
+                ) : null}
+                {post.excerpt ? <p class="coin-blog__excerpt">{post.excerpt}</p> : null}
+                <span class="coin-link-arrow">{t.readArticle} →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</section>

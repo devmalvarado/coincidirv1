@@ -1,0 +1,257 @@
+---
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import SiteHeader from '../../components/landing/SiteHeader.astro';
+import SiteFooter from '../../components/landing/SiteFooter.astro';
+import es from '../../i18n/landing.es.json';
+import type { LandingDict } from '../../i18n/types';
+import { legacyPlainTextToHtml, portableBlocksToHtml } from '../../lib/portable-text-html';
+import { formatPostTags, POST_TAG_LABELS_ES } from '../../lib/post-tags';
+import { sanityClient } from '../../lib/sanity';
+import { urlForImage } from '../../lib/sanity';
+import { resolveVideoEmbed } from '../../lib/video-embed';
+
+export async function getStaticPaths() {
+  if (!sanityClient) return [];
+  const slugs: string[] = await sanityClient.fetch(
+    `*[_type == "post" && defined(slug.current)].slug.current`
+  );
+  return slugs.map((slug: string) => ({ params: { slug } }));
+}
+
+const t = es as LandingDict;
+const { slug } = Astro.params;
+
+if (!sanityClient || !slug) {
+  return Astro.redirect('/home');
+}
+
+const post = await sanityClient.fetch(
+  `*[_type == "post" && slug.current == $slug][0]{
+    title,
+    excerpt,
+    mainImage,
+    publishedAt,
+    tags,
+    videoUrl,
+    gallery,
+    body
+  }`,
+  { slug }
+);
+
+if (!post) {
+  return Astro.redirect('/home');
+}
+
+const cover = post.mainImage
+  ? urlForImage(post.mainImage as SanityImageSource)?.width(960).url()
+  : null;
+
+const bodyHtml = Array.isArray(post.body)
+  ? portableBlocksToHtml(post.body)
+  : typeof post.body === 'string' && post.body.trim()
+    ? legacyPlainTextToHtml(post.body)
+    : '';
+
+const video = resolveVideoEmbed(post.videoUrl);
+
+const galleryItems = Array.isArray(post.gallery)
+  ? post.gallery.map((img: SanityImageSource & { alt?: string; caption?: string }) => {
+      const src = urlForImage(img)?.width(880).url();
+      return src ? { src, alt: img.alt ?? '', caption: img.caption ?? '' } : null;
+    }).filter(Boolean)
+  : [];
+
+const tagLine = formatPostTags(post.tags, POST_TAG_LABELS_ES);
+---
+<LandingLayout lang="es" title={post.title} description={post.excerpt ?? t.meta.description}>
+  <SiteHeader locale="es" header={t.header} />
+  <article class="coin-article">
+    <div class="coin-container">
+      <p class="coin-article__back">
+        <a href="/home#blog">← Blog</a>
+      </p>
+      {
+        cover ? (
+          <img
+            class="coin-article__cover"
+            src={cover}
+            alt=""
+            width="960"
+            height="540"
+            loading="eager"
+            decoding="async"
+          />
+        ) : null
+      }
+      <h1 class="coin-article__title">{post.title}</h1>
+      {tagLine.length ? <p class="coin-article__tags">{tagLine.join(' · ')}</p> : null}
+      {post.excerpt ? <p class="coin-article__lead">{post.excerpt}</p> : null}
+      {
+        video?.kind === 'iframe' ? (
+          <div class="coin-article__video">
+            <iframe
+              src={video.src}
+              title="Vídeo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            />
+          </div>
+        ) : video?.kind === 'link' ? (
+          <p class="coin-article__video-link">
+            <a href={video.href} rel="noopener noreferrer" target="_blank">Ver vídeo</a>
+          </p>
+        ) : null
+      }
+      {
+        galleryItems.length ? (
+          <div class="coin-article__gallery">
+            {galleryItems.map((item) => (
+              <figure class="coin-article__gallery-item">
+                <img src={item!.src} alt={item!.alt} loading="lazy" decoding="async" />
+                {item!.caption ? <figcaption>{item!.caption}</figcaption> : null}
+              </figure>
+            ))}
+          </div>
+        ) : null
+      }
+      {bodyHtml ? <div class="coin-article__body" set:html={bodyHtml} /> : null}
+    </div>
+  </article>
+  <SiteFooter footer={t.footer} />
+</LandingLayout>
+
+<style>
+  .coin-article {
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .coin-article__back {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+  }
+  .coin-article__back a {
+    color: var(--coin-purple);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .coin-article__back a:hover {
+    text-decoration: underline;
+  }
+  .coin-article__cover {
+    width: 100%;
+    max-height: min(70vh, 480px);
+    object-fit: cover;
+    border-radius: var(--coin-radius-lg);
+    margin-bottom: 1.5rem;
+  }
+  .coin-article__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0 0 0.5rem;
+    line-height: 1.15;
+    color: var(--coin-text-on-dark);
+  }
+  .coin-article__tags {
+    margin: 0 0 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--coin-purple);
+    letter-spacing: 0.02em;
+  }
+  .coin-article__lead {
+    font-size: 1.05rem;
+    color: var(--coin-text-muted);
+    line-height: 1.55;
+    margin: 0 0 1.5rem;
+  }
+  .coin-article__video {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 1.5rem;
+    border-radius: var(--coin-radius-md);
+    overflow: hidden;
+    background: var(--coin-brand-dark);
+  }
+  .coin-article__video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .coin-article__video-link {
+    margin: 0 0 1.25rem;
+    font-size: 0.9375rem;
+  }
+  .coin-article__video-link a {
+    color: var(--coin-purple);
+    font-weight: 600;
+  }
+  .coin-article__gallery {
+    display: grid;
+    gap: 1rem;
+    max-width: 42rem;
+    margin: 0 0 1.5rem;
+  }
+  .coin-article__gallery-item {
+    margin: 0;
+  }
+  .coin-article__gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--coin-radius-md);
+    display: block;
+  }
+  .coin-article__gallery-item figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: var(--coin-text-muted);
+  }
+  .coin-article__body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--coin-text-muted);
+    max-width: 42rem;
+  }
+  .coin-article__body :global(p) {
+    margin: 0 0 1rem;
+  }
+  .coin-article__body :global(h2) {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.65rem;
+    color: var(--coin-text-on-dark);
+  }
+  .coin-article__body :global(h3) {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 1.25rem 0 0.5rem;
+    color: var(--coin-text-on-dark);
+  }
+  .coin-article__body :global(blockquote) {
+    margin: 1rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--coin-purple);
+    color: var(--coin-text-muted);
+  }
+  .coin-article__body :global(ul),
+  .coin-article__body :global(ol) {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+  }
+  .coin-article__body :global(a) {
+    color: var(--coin-purple);
+    font-weight: 600;
+  }
+  .coin-article__figure {
+    margin: 1.25rem 0;
+  }
+  .coin-article__body :global(.coin-article__figure img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--coin-radius-md);
+  }
+</style>

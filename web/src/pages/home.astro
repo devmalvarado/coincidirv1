@@ -1,0 +1,27 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import SiteHeader from '../components/landing/SiteHeader.astro';
+import HeroSection from '../components/landing/HeroSection.astro';
+import PillarsSection from '../components/landing/PillarsSection.astro';
+import SolucionesSection from '../components/landing/SolucionesSection.astro';
+import RecursosSection from '../components/landing/RecursosSection.astro';
+import BlogSection from '../components/landing/BlogSection.astro';
+import SiteFooter from '../components/landing/SiteFooter.astro';
+import es from '../i18n/landing.es.json';
+import type { LandingDict } from '../i18n/types';
+import { fetchBlogPosts } from '../lib/sanity-queries';
+
+const t = es as LandingDict;
+const posts = await fetchBlogPosts();
+---
+<LandingLayout lang="es" title={t.meta.title} description={t.meta.description}>
+  <SiteHeader locale="es" header={t.header} />
+  <main>
+    <HeroSection hero={t.hero} />
+    <PillarsSection pillars={t.pillars} />
+    <SolucionesSection soluciones={t.soluciones} />
+    <RecursosSection recursos={t.recursos} />
+    <BlogSection blog={t.blog} posts={posts} locale="es" />
+  </main>
+  <SiteFooter footer={t.footer} />
+</LandingLayout>

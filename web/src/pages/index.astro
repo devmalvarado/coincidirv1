@@ -1,0 +1,60 @@
+---
+import SplashLayout from '../layouts/SplashLayout.astro';
+import SplashLottie from '../components/SplashLottie.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+---
+<SplashLayout title="Coincidir">
+  <div class="splash-toolbar">
+    <ThemeToggle
+      themeAria="Tema de la interfaz"
+      themeAuto="Automático (según el sistema)"
+      themeLight="Modo claro"
+      themeDark="Modo oscuro"
+    />
+  </div>
+  <SplashLottie />
+  <a
+    href="/home"
+    class="splash-enter"
+    aria-label="Entrar al sitio"
+  >
+    <span class="splash-enter__hint">Pulsa para continuar</span>
+  </a>
+</SplashLayout>
+
+<style>
+  .splash-toolbar {
+    position: fixed;
+    top: clamp(0.75rem, 3vw, 1.25rem);
+    right: clamp(0.75rem, 3vw, 1.25rem);
+    z-index: 2;
+  }
+
+  .splash-enter {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 2.5rem);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--coin-splash-hint, rgba(255, 255, 255, 0.55));
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    background: transparent;
+    transition: color 0.2s ease;
+  }
+  .splash-enter:hover,
+  .splash-enter:focus-visible {
+    color: var(--coin-splash-hint-hover, rgba(255, 255, 255, 0.9));
+    outline: none;
+  }
+  .splash-enter:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(168, 85, 247, 0.6);
+  }
+  .splash-enter__hint {
+    pointer-events: none;
+  }
+</style>

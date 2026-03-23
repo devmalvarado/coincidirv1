@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-web": "^0.67.0",
+    "@portabletext/to-html": "^2.0.17",
+    "@sanity/client": "^6.28.0",
+    "@sanity/image-url": "^1.1.0",
+    "astro": "^5.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,33 @@
+---
+import type { LandingDict } from '../../i18n/types';
+
+interface Props {
+  soluciones: LandingDict['soluciones'];
+}
+const { soluciones: t } = Astro.props;
+
+const variants = [
+  'purpleYellow',
+  'darkPink',
+  'yellowPurple',
+  'darkPink',
+  'purpleYellow',
+] as const;
+---
+<section class="coin-section coin-soluciones" id="soluciones" aria-labelledby="soluciones-heading">
+  <div class="coin-container">
+    <h2 class="coin-section__title" id="soluciones-heading">
+      {t.title}
+    </h2>
+    <ul class="coin-soluciones__list">
+      {t.items.map((item, i) => (
+        <li class="coin-soluciones__row">
+          <div class:list={['coin-soluciones__block', `coin-soluciones__block--${variants[i]}`]}>
+            <span class="coin-soluciones__block-title">{item.title}</span>
+          </div>
+          <p class="coin-soluciones__body">{item.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
