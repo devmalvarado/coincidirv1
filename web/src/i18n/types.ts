@@ -45,7 +45,6 @@ export interface LandingDict {
   };
   blog: {
     title: string;
-    titleNote: string;
     readArticle: string;
     empty: string;
   };

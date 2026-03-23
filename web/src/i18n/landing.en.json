@@ -95,7 +95,6 @@
   },
   "blog": {
     "title": "Blog",
-    "titleNote": "(Sanity)",
     "readArticle": "Read article",
     "empty": "No posts yet. Add “Blog post” entries in Sanity Studio."
   },
